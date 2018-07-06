@@ -4,6 +4,37 @@ gsed
 # java
 openjdk8-1.8.172
 jetty-9.2.14
+# php - only for phpmyadmin
+php56-fpm
+php56-pdo
+php56-pdo_mysql
+php56-pdo_sqlite
+php56-zlib
+php56-uploadprogress
+php56-soap
+php56-posix
+php56-pear
+php56-pear-Net_SMTP
+php56-pear-Mail_Mime
+php56-pear-HTTP_Request
+php56-pear-HTTP
+php56-mysqli
+php56-mysql
+php56-mcrypt
+php56-mbstring
+php56-json
+php56-intl
+php56-imagick
+php56-iconv
+php56-gd
+php56-exif
+php56-curl
+php56-bz2
+php56-bcmath
+php56-zip
+php56-ftp
+php56-opcache
+php56-imap
 # sql
 percona-server-5.6.39
 percona-client-5.6.39
