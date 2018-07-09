@@ -111,6 +111,12 @@ chown -R letsencrypt:kumquat /var/letsencrypt/
 echo "* Activate munin plugins"
 /opt/qutic/bin/munin-node-plugins ${MUNIN_PLUGINS}
 
+echo "* Setup jetty home"
+groupadd -g 1101 jetty
+useradd -m -s /usr/bin/bash -d /home/jetty -u 1101 -g jetty jetty
+passwd -N jetty
+passwd -d jetty
+
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*
 
