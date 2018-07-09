@@ -53,6 +53,7 @@ py35-expat
 py35-zmq
 py35-gevent
 py35-msgpack
+py35-certbot
 https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q4/x86_64/py35-percona56client-1.3.12.tgz
 # ftp
 proftpd

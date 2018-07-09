@@ -99,6 +99,7 @@ echo "* Create extra Let's Encrypt user for user account security"
 useradd -c "Lets Encrypt SSL certificate service" -b /var -g kumquat -m letsencrypt
 
 echo "* Create Let's Encrypt folders"
+mkdir -p /opt/local/etc/letsencrypt/
 mkdir -p /var/letsencrypt/state/
 mkdir -p /var/letsencrypt/acme/.well-known/acme-challenge/
 touch /var/letsencrypt/acme/.well-known/acme-challenge/.keep
