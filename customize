@@ -108,7 +108,7 @@ chmod -R 700 /var/letsencrypt/state/
 chown -R letsencrypt:kumquat /var/letsencrypt/
 
 echo "* Activate munin plugins"
-/opt/core/bin/munin-node-plugins ${MUNIN_PLUGINS}
+/opt/qutic/bin/munin-node-plugins ${MUNIN_PLUGINS}
 
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*

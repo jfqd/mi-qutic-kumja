@@ -2,8 +2,8 @@
 # tools
 gsed
 # java
-openjdk8-1.8.172
-jetty-9.2.14
+openjdk8
+# jetty-9.2.14
 # php - only for phpmyadmin
 php56-fpm
 php56-pdo
@@ -57,5 +57,3 @@ https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q4/x86_64/py35-percona56cli
 # ftp
 proftpd
 proftpd-percona56
-# monitoring
-goaccess
