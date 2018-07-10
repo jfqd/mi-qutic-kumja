@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+
+copy_war_file(){
+  /usr/bin/cp "$1" "$2"
+  /usr/bin/chown jetty:jetty "$2"
+}
+
+restart_jetty(){
+  /usr/sbin/svcadm restart svc:/jetty/$1:default
+}
+
+for folder in /var/www/*; do
+  name=$(/usr/bin/basename "$folder")
+  short_name=$(/usr/bin/echo "$name" | /usr/bin/cut -f1 -d'.')
+  upload_war=$(/usr/bin/ls /var/www/$name/htdocs/*.war 2>/dev/null| /usr/bin/head -n1)
+  prod_war="/home/jetty/$short_name/server/webapps/root.war"
+  smf_name=$short_name
+  
+  if [[ -f "$prod_war" ]]; then
+    if [[ -f "$upload_war" ]]; then
+      if [[ "$upload_war" -nt "$prod_war" ]]; then
+        copy_war_file "$upload_war" "$prod_war"
+        restart_jetty $smf_name
+      fi
+    fi
+  else
+    if [[ -f "$upload_war" ]]; then
+      copy_war_file "$upload_war" "$prod_war"
+      restart_jetty $smf_name
+    fi
+  fi
+done

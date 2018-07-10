@@ -48,6 +48,12 @@ echo "* Setup gunicorn"
 mkdir -p /opt/local/etc/gunicorn
 svccfg import /tmp/gunicorn.xml
 
+echo "* Copy jetty fix for kumquat"
+cp /tmp/update_vhosts.py /opt/local/share/httpd/htdocs/index.html
+cp /tmp/vhost.conf /opt/kumquat/web/templates/web/vhost.conf
+rm /tmp/update_vhosts.py
+rm /tmp/vhost.conf
+
 echo "* Setup kumquat backend service"
 svccfg import /tmp/kumquat.xml
 
@@ -116,6 +122,10 @@ groupadd -g 1101 jetty
 useradd -m -s /usr/bin/bash -d /home/jetty -u 1101 -g jetty jetty
 passwd -N jetty
 passwd -d jetty
+
+curl -L https://download.qutic.com/src/jetty/jetty-distribution-9.4.11.v20180605.tar.gz > /home/jetty/jetty-distribution-9.4.11.v20180605.tar.gz
+cp /tmp/jetty.xml /home/jetty/jetty.xml
+rm /tmp/jetty.xml
 
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*
