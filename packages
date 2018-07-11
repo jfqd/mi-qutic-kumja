@@ -39,6 +39,9 @@ php56-imap
 percona-server-5.6.39
 percona-client-5.6.39
 quickbackup-percona
+# munin
+p5-DBD-percona56
+p5-Cache-Cache
 # web
 apache
 ap24-usdt
