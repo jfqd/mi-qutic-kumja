@@ -12,7 +12,7 @@ restart_jetty(){
 for folder in /var/www/*; do
   name=$(/usr/bin/basename "$folder")
   short_name=$(/usr/bin/echo "$name" | /usr/bin/cut -f1 -d'.')
-  upload_war=$(/usr/bin/ls /var/www/$name/htdocs/*.war 2>/dev/null| /usr/bin/head -n1)
+  upload_war=$(/usr/bin/ls "/var/www/$name/htdocs/"*.war 2>/dev/null | /usr/bin/head -n1)
   prod_war="/home/jetty/$short_name/server/webapps/root.war"
   smf_name=$short_name
   
