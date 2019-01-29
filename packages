@@ -62,3 +62,6 @@ https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q4/x86_64/py35-percona56cli
 # ftp
 proftpd
 proftpd-percona56
+# archive
+zip
+bunzip
