@@ -1,0 +1,72 @@
+##
+## This is a basic ProFTPD configuration file
+##
+ServerName                      "kumquat FTP service"
+ServerType                      standalone
+DefaultServer                   on
+
+# Load required modules
+LoadModule mod_tls.c
+LoadModule mod_sql.c
+LoadModule mod_sql_mysql.c
+LoadModule mod_sql_passwd.c
+
+# Port 21 is the standard FTP port.
+Port                            21
+
+# Don't use IPv6 support by default.
+UseIPv6                         on
+
+# Umask 022 is a good standard umask to prevent new dirs and files
+# from being group and world writable.
+Umask                           022
+
+# To prevent DoS attacks, set the maximum number of child processes
+# to 30.
+MaxInstances                    30
+
+# Set the user and group under which the server will run.
+User                            nobody
+Group                           nogroup
+
+# To cause every FTP user to be "jailed" (chrooted) into their home
+# directory, uncomment this line.
+DefaultRoot ~
+
+# Normally, we want files to be overwriteable.
+AllowOverwrite          on
+
+# Logging
+SystemLog /var/log/proftpd/proftpd.log
+TransferLog /var/log/proftpd/xferlog
+
+# MySQL connection
+SQLConnectInfo  kumquat@localhost kumquat 4ab11e452fdd1807
+SQLAuthTypes    Crypt
+SQLAuthenticate users
+
+# MySQL queries
+# username, passwd, uid, gid, homedir, shell
+SQLNamedQuery get-user-by-name SELECT "DISTINCT ftp.name, ftp.password, 847 as uid, 847 as gid, IF(ftp.vhost_id is Null, CONCAT('/var/www', ftp.path), CONCAT('/var/www/', vhost.name, '.', domain.name, '/', ftp.path) ) as homedir, '/bin/false' as shell FROM ftp_account ftp, kumquat_domain domain, web_vhost vhost WHERE ((ftp.vhost_id = vhost.id AND vhost.domain_id = domain.id) OR ftp.vhost_id is NULL) AND ftp.name = '%U'"
+SQLNamedQuery get-user-by-id SELECT "'www' as name, 847 as uid, 847 as gid, '/var/www' as homedir, '/bin/false' as shell"
+SQLUserInfo custom:/get-user-by-name/get-user-by-id
+
+# Default MySQL / UID values
+SQLMinID 847
+SQLDefaultGID 847
+
+# We don't need a valid shell for MySQL authentication
+RequireValidShell off
+
+# TLS/SSL
+TLSEngine                on
+TLSProtocol              TLSv1
+TLSRequired              on
+TLSVerifyClient          off
+TLSOptions               NoCertRequest NoSessionReuseRequired
+TLSCertificateChainFile  /opt/local/etc/httpd/ssl/kumquat.crt
+TLSRSACertificateFile    /opt/local/etc/httpd/ssl/kumquat.crt
+TLSRSACertificateKeyFile /opt/local/etc/httpd/ssl/kumquat.key
+
+# Use the IANA registered ephemeral port range
+PassivePorts 49152 65534
