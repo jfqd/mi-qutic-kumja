@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# 0,5,10,15,20,25,30,35,40,45,55 * * * * TIMEOUT=2 URL=https://example.com /opt/qutic/bin/httpd_health_check ; if [[ $? -ne 1 ]]; then /usr/sbin/svcadm restart apache; echo "restart apache"; fi
+#
+( curl -s $URL 1>/dev/null ) & pid=$!
+( sleep $TIMEOUT && kill -HUP $pid ) 2>/dev/null & watcher=$!
+wait $pid 2>/dev/null && pkill -HUP -P $watcher
