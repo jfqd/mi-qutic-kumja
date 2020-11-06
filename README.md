@@ -2,6 +2,8 @@
 
 This repository is based on [Joyent mibe](https://github.com/joyent/mibe). Please note this repository should be build with the [mi-core-base](https://github.com/skylime/mi-core-base) mibe image.
 
+The original kumquat idea and the code if from [skylime](https://github.com/skylime/) and for php usage. We copied it and used it for hosting a java app.
+
 ## description
 
 This is a standalone webservice / webhosting template. It provides you with
