@@ -7,7 +7,7 @@ The original kumquat idea and the code if from [skylime](https://github.com/skyl
 ## description
 
 This is a standalone webservice / webhosting template. It provides you with
-[kumquat](https://github.com/jfqd/kumja), an awesome minimal web interface to
+[kumquat](https://github.com/jfqd/kumquat), an awesome minimal web interface to
 manage domains, vhosts, mysql and ftp accounts.
 
 It install jetty with apache, proftpd and for kumquat gunicorn. Percona is
